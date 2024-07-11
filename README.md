@@ -28,8 +28,15 @@ values
 
 ## Possible Improvements
 
+- Use JWT for user authentication
+  - get userID from JWT directly instead of from HTTP request
 - Use LoanStatusHistory table.
   - From status
   - To status
   - Timestamp
   - Detail json (picture proof, signed agreement, etc.)
+- Upload VisitProofBeforeApprovalPictureUrl
+  - With cloud object storage:
+    - generate presigned URL to upload image and then store the link in database.
+    - get image with presigned URL because it's not for public.
+- Create end-to-end tests to make sure http request parsing and integration with database/object storage works correctly

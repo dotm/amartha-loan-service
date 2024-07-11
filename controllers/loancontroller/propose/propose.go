@@ -1,4 +1,4 @@
-package loancontroller
+package proposeloancontroller
 
 import (
 	"amartha/loan-service/constants"
@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type ProposeLoanInput struct {
@@ -47,13 +48,17 @@ func ProposeLoanHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": loan})
 }
 
+// Should be covered with unit test
 func ProposeLoanBusinessLogic(input ProposeLoanInput, user models.User, now time.Time) (loan models.Loan, err error) {
+	//Validate business logic
 	if user.Role != constants.UserRoleBorrower {
-		err = fmt.Errorf("user is not borrower")
+		err = fmt.Errorf("user should be %s", constants.UserRoleBorrower)
 		return
 	}
 
+	//Create data
 	loan = models.Loan{
+		ID:                   uuid.New().String(),
 		BorrowerUserID:       input.BorrowerUserID,
 		Status:               constants.LoanStatusProposed,
 		PrincipalAmount:      input.PrincipalAmount,
