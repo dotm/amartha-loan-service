@@ -41,14 +41,14 @@ func TestProposeLoanSuccessful(t *testing.T) {
 	//then
 	assert.NoError(t, err)
 	assert.NotNil(t, loan)
-	assert.Equal(t, loan.BorrowerUserID, userID)
-	assert.Equal(t, loan.Status, constants.LoanStatusProposed)
-	assert.Equal(t, loan.PrincipalAmount, principalAmount)
-	assert.Equal(t, loan.TenorInMonths, tenorInMonths)
-	assert.Equal(t, loan.BorrowerRatePerMonth, borrowerRatePerMonth)
-	assert.Equal(t, loan.InvestorRatePerMonth, investorRatePerMonth)
-	assert.Equal(t, loan.AgreementLetterUrl, agreementLetterUrl)
-	assert.Equal(t, loan.TimeProposed, timeProposed)
+	assert.Equal(t, userID, loan.BorrowerUserID)
+	assert.Equal(t, constants.LoanStatusProposed, loan.Status)
+	assert.Equal(t, principalAmount, loan.PrincipalAmount)
+	assert.Equal(t, tenorInMonths, loan.TenorInMonths)
+	assert.Equal(t, borrowerRatePerMonth, loan.BorrowerRatePerMonth)
+	assert.Equal(t, investorRatePerMonth, loan.InvestorRatePerMonth)
+	assert.Equal(t, agreementLetterUrl, loan.AgreementLetterUrl)
+	assert.Equal(t, timeProposed, loan.TimeProposed)
 }
 
 // TestProposeFailedIncorrectUserRole for the case when user is not borrower

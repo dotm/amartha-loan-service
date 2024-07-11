@@ -2,6 +2,7 @@ package main
 
 import (
 	approveloancontroller "amartha/loan-service/controllers/loancontroller/approve"
+	investloancontroller "amartha/loan-service/controllers/loancontroller/invest"
 	proposeloancontroller "amartha/loan-service/controllers/loancontroller/propose"
 	"amartha/loan-service/models"
 	"net/http"
@@ -18,6 +19,7 @@ func main() {
 	})
 	r.POST("/v1/loan.propose", proposeloancontroller.ProposeLoanHandler)
 	r.POST("/v1/loan.approve", approveloancontroller.ApproveLoanHandler)
+	r.POST("/v1/loan.invest", investloancontroller.InvestLoanHandler)
 
 	r.Run()
 }

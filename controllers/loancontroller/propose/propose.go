@@ -58,7 +58,7 @@ func ProposeLoanBusinessLogic(input ProposeLoanInput, user models.User, now time
 
 	//Create data
 	loan = models.Loan{
-		ID:                   uuid.New().String(),
+		ID:                   uuid.NewString(),
 		BorrowerUserID:       input.BorrowerUserID,
 		Status:               constants.LoanStatusProposed,
 		PrincipalAmount:      input.PrincipalAmount,

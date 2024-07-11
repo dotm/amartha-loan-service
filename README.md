@@ -30,6 +30,8 @@ values
 
 - Use JWT for user authentication
   - get userID from JWT directly instead of from HTTP request
+- Cron to cancel loan if investments doesn't reach principal amount after some expiry time.
+  - New loan status: expired.
 - Use LoanStatusHistory table.
   - From status
   - To status

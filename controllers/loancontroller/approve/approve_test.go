@@ -15,7 +15,7 @@ var tenorInMonths = int64(12)
 var borrowerRatePerMonth = 0.01
 var investorRatePerMonth = 0.008
 var agreementLetterUrl = "https://example.com"
-var timeProposed = time.Now()
+var timeProposed = time.Now().Add(-time.Minute)
 
 var loanID = "loan_1"
 var borrowerUserID = "borrower_1"
@@ -55,9 +55,9 @@ func TestApproveLoanSuccessful(t *testing.T) {
 	//then
 	assert.NoError(t, err)
 	assert.NotNil(t, loan)
-	assert.Equal(t, loan.Status, constants.LoanStatusApproved)
-	assert.Equal(t, *loan.VisitProofBeforeApprovalPictureUrl, visitProofBeforeApprovalPictureUrl)
-	assert.Equal(t, *loan.TimeApproved, timeApproved)
+	assert.Equal(t, constants.LoanStatusApproved, loan.Status)
+	assert.Equal(t, visitProofBeforeApprovalPictureUrl, *loan.VisitProofBeforeApprovalPictureUrl)
+	assert.Equal(t, timeApproved, *loan.TimeApproved)
 }
 
 // TestApproveFailedIncorrectUserRole for the case when user is not field officer
