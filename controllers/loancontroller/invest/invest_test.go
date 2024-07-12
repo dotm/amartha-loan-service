@@ -152,6 +152,39 @@ func TestInvestFailedOverSubscribed(t *testing.T) {
 	assert.Error(t, err)
 }
 
+// TestInvestFailedUserAlreadyInvest for the case when user already invest before
+func TestInvestFailedUserAlreadyInvest(t *testing.T) {
+	//given
+	input := InvestLoanInput{
+		LoanID: loanID,
+		Amount: int64(100000),
+	}
+	approvedLoan := models.Loan{
+		ID:                                 loanID,
+		BorrowerUserID:                     borrowerUserID,
+		Status:                             constants.LoanStatusApproved,
+		PrincipalAmount:                    principalAmount,
+		TenorInMonths:                      tenorInMonths,
+		BorrowerRatePerMonth:               borrowerRatePerMonth,
+		InvestorRatePerMonth:               investorRatePerMonth,
+		AgreementLetterUrl:                 agreementLetterUrl,
+		VisitProofBeforeApprovalPictureUrl: &visitProofBeforeApprovalPictureUrl,
+		TimeProposed:                       timeProposed,
+		TimeApproved:                       &timeApproved,
+	}
+	user := models.User{
+		ID:   "previous-investor-1",
+		Role: constants.UserRoleInvestor,
+		Name: "User 1",
+	}
+
+	//when
+	_, _, err := InvestLoanBusinessLogic(input, user, approvedLoan, existingInvestments, timeInvested)
+
+	//then
+	assert.Error(t, err)
+}
+
 // TestInvestFailedIncorrectUserRole for the case when user is not investor
 func TestInvestFailedIncorrectUserRole(t *testing.T) {
 	//given

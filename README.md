@@ -1,6 +1,10 @@
 ## TODO
 
-- add end-to-end test based on https://github.com/dotm/diskon-hunter-price-monitoring/tree/master/app-be-e2e-test
+- Create end-to-end tests to make sure:
+  - http request parsing works correctly
+  - integration with database/object storage/email client works correctly
+  - example Golang end-to-end tests that I've created for another project:
+    - https://github.com/dotm/diskon-hunter-price-monitoring/tree/master/app-be-e2e-test
 
 ## Run in Local
 
@@ -9,9 +13,14 @@
 
 To upload to S3, you can use the upload-to-s3.html file in a browser.
 
-## Run all tests
+## Run all unit tests
 
 - go test ./...
+
+## Test Manually
+
+- You can use the exported Postman json: amartha-loan-service-postman-v2.1.postman_collection.json
+  - Import this and manually test it with Postman
 
 ## Setup
 
@@ -70,9 +79,4 @@ AWS Setup:
   - With cloud object storage:
     - generate presigned URL to upload image and then store the link in database.
     - get image with presigned URL because it's not for public.
-- Create end-to-end tests to make sure:
-  - http request parsing works correctly
-  - integration with database/object storage/email client works correctly
-  - example end-to-end tests that I've created for another project:
-    - https://github.com/dotm/diskon-hunter-price-monitoring/tree/master/app-be-e2e-test
 - add logging for visibility and track error metrics for alert in PagerDuty

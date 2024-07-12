@@ -13,7 +13,8 @@ import (
 )
 
 type UploadVisitProofInput struct {
-	LoanID string `json:"loan_id" binding:"required"`
+	LoanID   string `json:"loan_id" binding:"required"`
+	FileType string `json:"file_type" binding:"required"`
 }
 
 func UploadVisitProofHandler(c *gin.Context) {
@@ -21,6 +22,10 @@ func UploadVisitProofHandler(c *gin.Context) {
 	var input UploadVisitProofInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if input.FileType != "jpg" && input.FileType != "jpeg" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid file type selected"})
 		return
 	}
 
@@ -62,7 +67,7 @@ func UploadVisitProofHandler(c *gin.Context) {
 	presignedURLForPutObject, err := s3helper.GeneratePresignedURLForPutObject(
 		s3Client,
 		envhelper.GetEnvVar("S3_BUCKET_NAME"),
-		fmt.Sprintf("visit-proof/%s", input.LoanID),
+		fmt.Sprintf("visit-proof/%s.%s", input.LoanID, input.FileType),
 	)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

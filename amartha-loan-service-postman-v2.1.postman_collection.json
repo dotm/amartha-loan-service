@@ -1,0 +1,1222 @@
+{
+	"info": {
+		"_postman_id": "c43fb758-e9b7-4c8c-9bce-69b5a749c38c",
+		"name": "amartha-loan-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3694011"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role\": \"BORROWER\",\r\n  \"email\": \"amartha_test_borrower_1@yopmail.com\",\r\n  \"raw_password\": \"Test123!\",\r\n  \"name\": \"Borrower 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/user.signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"user.signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"role\": \"BORROWER\",\r\n  \"email\": \"amartha_test_borrower_1@yopmail.com\",\r\n  \"raw_password\": \"Test123!\",\r\n  \"name\": \"Borrower 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user.signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user.signup"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 12:11:51 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "212"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"5b4c1830-f2aa-4f68-a857-3a31e1389b23\",\n        \"role\": \"BORROWER\",\n        \"email\": \"borrower_1@yopmail.com\",\n        \"hashed_password\": \"$2a$14$7HhumF9H.hJCTIAqL/MsYODfgy9DkQ2iNQ9XZ1Om7TedVjB680/Oy\",\n        \"name\": \"Borrower 1\",\n        \"investor\": null\n    }\n}"
+				},
+				{
+					"name": "Error Role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"role\": \"BORROWER1\",\r\n  \"email\": \"borrower_1@yopmail.com\",\r\n  \"raw_password\": \"borrower_1\",\r\n  \"name\": \"Borrower 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user.signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user.signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 12:12:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user email already registered\"\n}"
+				},
+				{
+					"name": "Email Already Registered",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"role\": \"BORROWER\",\r\n  \"email\": \"borrower_1@yopmail.com\",\r\n  \"raw_password\": \"borrower_1\",\r\n  \"name\": \"Borrower 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user.signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user.signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 12:12:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user email already registered\"\n}"
+				}
+			]
+		},
+		{
+			"name": "User Sign In",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"amartha_test_investor_2@yopmail.com\",\r\n  \"raw_password\": \"Test123!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/user.signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"user.signin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Email Has Not Been Registered",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"amartha_test_borrower_2@yopmail.com\",\r\n  \"raw_password\": \"Test123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user.signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user.signin"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 12:19:45 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user email has not been registered\"\n}"
+				},
+				{
+					"name": "Password Incorrect",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"amartha_test_borrower_1@yopmail.com\",\r\n  \"raw_password\": \"Test123!1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user.signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user.signin"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 12:20:02 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user password incorrect\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Loan Propose",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsImtpZCI6IjhiYmUwN2RlLTE4NjctNDJmMS04YjJiLWMwODMzNTIyYzM3NS0yYmE2ZTlhNy1kMTBjLTRiY2YtYjhhMi01Y2RhMjhhZmRjMDAiLCJ0eXAiOiJKV1QifQ.eyJhbGNjIjp7InVzZXJfaWQiOiJib3Jyb3dlcl8xIn0sImF1ZCI6WyJhbWFydGhhLWZyb250ZW5kIl0sImV4cCI6MTc1MjMyMjgxMywiaWF0IjoxNzIwNzg2ODEzLCJpc3MiOiJhbWFydGhhL2xvYW4tZW5naW5lLXNlcnZpY2UifQ.EGvJRZfWE2HyFf8v1I967IYAKVj7fWoUWBERGDcshl7WhARn_D5Akrq_eLgN5m4j0kO6KPWgxPBNqXS23cCs-w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"principal_amount\": 1000000,\r\n  \"tenor_in_months\": 12,\r\n  \"borrower_rate_per_month\": 0.01,\r\n  \"investor_rate_per_month\": 0.008,\r\n  \"agreement_letter_url\": \"https://example.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/loan.propose",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"loan.propose"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"principal_amount\": 1000000,\r\n  \"tenor_in_months\": 12,\r\n  \"borrower_rate_per_month\": 0.01,\r\n  \"investor_rate_per_month\": 0.008,\r\n  \"agreement_letter_url\": \"https://example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.propose",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.propose"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 16:25:51 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "481"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n        \"borrower_user_id\": \"borrower_1\",\n        \"status\": \"PROPOSED\",\n        \"principal_amount\": 1000000,\n        \"tenor_in_months\": 12,\n        \"borrower_rate_per_month\": 0.01,\n        \"investor_rate_per_month\": 0.008,\n        \"agreement_letter_url\": \"https://example.com\",\n        \"time_proposed\": \"2024-07-11T23:25:51.4028533+07:00\",\n        \"time_approved\": null,\n        \"time_invested\": null,\n        \"time_disbursed\": null,\n        \"visit_proof_before_approval_picture_url\": null,\n        \"signed_loan_agreement_letter_url\": null,\n        \"investor\": null\n    }\n}"
+				},
+				{
+					"name": "Error Role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"borrower_user_id\": \"investor_1\",\r\n  \"principal_amount\": 1000000,\r\n  \"tenor_in_months\": 12,\r\n  \"borrower_rate_per_month\": 0.01,\r\n  \"investor_rate_per_month\": 0.008,\r\n  \"agreement_letter_url\": \"https://example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.propose",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.propose"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 15:26:32 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"User is not borrower!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Upload Visit Proof",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsImtpZCI6IjhiYmUwN2RlLTE4NjctNDJmMS04YjJiLWMwODMzNTIyYzM3NS0yYmE2ZTlhNy1kMTBjLTRiY2YtYjhhMi01Y2RhMjhhZmRjMDAiLCJ0eXAiOiJKV1QifQ.eyJhbGNjIjp7InVzZXJfaWQiOiJmaWVsZF9vZmZpY2VyXzEifSwiYXVkIjpbImFtYXJ0aGEtZnJvbnRlbmQiXSwiZXhwIjoxNzUyMzMyMzg0LCJpYXQiOjE3MjA3OTYzODQsImlzcyI6ImFtYXJ0aGEvbG9hbi1lbmdpbmUtc2VydmljZSJ9.SXyHwzLLx71f6LQutoyG5ecK9z4YB_qecQLnDSMifzAnQHhLr7ZCS2Z8Nw6-GGD7VFeo-QEozqiCz46vvYQzZQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"file_type\": \"jpeg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/object_storage.get_presigned_url.upload_visit_proof",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"object_storage.get_presigned_url.upload_visit_proof"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"file_type\": \"jpeg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/object_storage.get_presigned_url.upload_visit_proof",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"object_storage.get_presigned_url.upload_visit_proof"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 16:40:34 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "427"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"url\": \"https://yoshua-amartha-test-files.s3.ap-southeast-1.amazonaws.com/visit-proof/c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQPWXMTNFAYPZYCMP%2F20240712%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20240712T164034Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=233e77d9d890ba272ff1785d16707f777c2395c509a3f6a100e97b90880a9125\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Loan Approve",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsImtpZCI6IjhiYmUwN2RlLTE4NjctNDJmMS04YjJiLWMwODMzNTIyYzM3NS0yYmE2ZTlhNy1kMTBjLTRiY2YtYjhhMi01Y2RhMjhhZmRjMDAiLCJ0eXAiOiJKV1QifQ.eyJhbGNjIjp7InVzZXJfaWQiOiJmaWVsZF9vZmZpY2VyXzEifSwiYXVkIjpbImFtYXJ0aGEtZnJvbnRlbmQiXSwiZXhwIjoxNzUyMzMyMzg0LCJpYXQiOjE3MjA3OTYzODQsImlzcyI6ImFtYXJ0aGEvbG9hbi1lbmdpbmUtc2VydmljZSJ9.SXyHwzLLx71f6LQutoyG5ecK9z4YB_qecQLnDSMifzAnQHhLr7ZCS2Z8Nw6-GGD7VFeo-QEozqiCz46vvYQzZQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"visit_proof_before_approval_picture_url\": \"https://yoshua-amartha-test-files.s3.ap-southeast-1.amazonaws.com/visit-proof/c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQPWXMTNFAYPZYCMP%2F20240712%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20240712T160352Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=355af7840389bf3348d7a3d2888f1fcdaa2648ac005599fa6c67d1636bb422b3\",\r\n  \"time_approved\": \"2024-07-11T23:27:58.687Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/loan.approve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"loan.approve"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Loan Not Found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"field_officer_user_id\": \"field_officer_1\",\r\n  \"visit_proof_before_approval_picture_url\": \"https://example.com/visit-proof\",\r\n  \"time_approved\": \"2024-07-11T16:27:58.687Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.approve"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 16:28:12 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"loan not found\"\n}"
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"visit_proof_before_approval_picture_url\": \"https://example.com/visit-proof\",\r\n  \"time_approved\": \"2024-07-11T23:27:58.687Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.approve"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 16:30:36 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "531"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n        \"borrower_user_id\": \"borrower_1\",\n        \"status\": \"APPROVED\",\n        \"principal_amount\": 1000000,\n        \"tenor_in_months\": 12,\n        \"borrower_rate_per_month\": 0.01,\n        \"investor_rate_per_month\": 0.008,\n        \"agreement_letter_url\": \"https://example.com\",\n        \"time_proposed\": \"2024-07-11T23:25:51.402853+07:00\",\n        \"time_approved\": \"2024-07-11T23:27:58.687Z\",\n        \"time_invested\": null,\n        \"time_disbursed\": null,\n        \"visit_proof_before_approval_picture_url\": \"https://example.com/visit-proof\",\n        \"signed_loan_agreement_letter_url\": null,\n        \"investor\": null\n    }\n}"
+				},
+				{
+					"name": "Success S3 URL",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"visit_proof_before_approval_picture_url\": \"s3://yoshua-amartha-test-files/visit-proof/c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"time_approved\": \"2024-07-11T23:27:58.687Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.approve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.approve"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 15:05:51 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "579"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\n        \"borrower_user_id\": \"borrower_1\",\n        \"status\": \"APPROVED\",\n        \"principal_amount\": 1000000,\n        \"tenor_in_months\": 12,\n        \"borrower_rate_per_month\": 0.01,\n        \"investor_rate_per_month\": 0.008,\n        \"agreement_letter_url\": \"https://example.com\",\n        \"time_proposed\": \"2024-07-12T21:59:24.926562+07:00\",\n        \"time_approved\": \"2024-07-11T23:27:58.687Z\",\n        \"time_invested\": null,\n        \"time_disbursed\": null,\n        \"visit_proof_before_approval_picture_url\": \"s3://yoshua-amartha-test-files/visit-proof/c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\n        \"signed_loan_agreement_letter_url\": null,\n        \"investor\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Loan Invest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsImtpZCI6IjhiYmUwN2RlLTE4NjctNDJmMS04YjJiLWMwODMzNTIyYzM3NS0yYmE2ZTlhNy1kMTBjLTRiY2YtYjhhMi01Y2RhMjhhZmRjMDAiLCJ0eXAiOiJKV1QifQ.eyJhbGNjIjp7InVzZXJfaWQiOiJpbnZlc3Rvcl8yIn0sImF1ZCI6WyJhbWFydGhhLWZyb250ZW5kIl0sImV4cCI6MTc1MjMzNTE3OSwiaWF0IjoxNzIwNzk5MTc5LCJpc3MiOiJhbWFydGhhL2xvYW4tZW5naW5lLXNlcnZpY2UifQ.OT1UNFyLIiuArfheh6SWBiM0NOExsN-75onTDwr8c7psK1ndo_4fOXrWsf3utfsiPBlnstu9lH6LPv-zmbNtvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"amount\": 800000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/loan.invest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"loan.invest"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"investor_user_id\": \"field_officer_1\",\r\n  \"amount\": 200000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.invest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.invest"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 17:33:32 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "35"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user should be INVESTOR\"\n}"
+				},
+				{
+					"name": "Success But Not Fulfilled",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"investor_user_id\": \"investor_1\",\r\n  \"amount\": 700000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.invest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.invest"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 17:36:16 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "757"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"loan\": {\n            \"id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n            \"borrower_user_id\": \"borrower_1\",\n            \"status\": \"APPROVED\",\n            \"principal_amount\": 1000000,\n            \"tenor_in_months\": 12,\n            \"borrower_rate_per_month\": 0.01,\n            \"investor_rate_per_month\": 0.008,\n            \"agreement_letter_url\": \"https://example.com\",\n            \"time_proposed\": \"2024-07-11T23:25:51.402853+07:00\",\n            \"time_approved\": \"2024-07-12T06:27:58.687+07:00\",\n            \"time_invested\": null,\n            \"time_disbursed\": null,\n            \"visit_proof_before_approval_picture_url\": \"https://example.com/visit-proof\",\n            \"signed_loan_agreement_letter_url\": null,\n            \"investor\": null\n        },\n        \"new_investment\": {\n            \"id\": \"db590216-2e5d-4b78-8fe4-a5c2c285c1d7\",\n            \"investor_user_id\": \"investor_1\",\n            \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n            \"amount\": 700000,\n            \"time_invested\": \"2024-07-12T00:36:16.7419844+07:00\"\n        }\n    }\n}"
+				},
+				{
+					"name": "Error Oversubscribed",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"investor_user_id\": \"investor_1\",\r\n  \"amount\": 900000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.invest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.invest"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 17:39:18 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"maximum amount available for investment is 800000\"\n}"
+				},
+				{
+					"name": "Success And Fulfilled",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"investor_user_id\": \"investor_1\",\r\n  \"amount\": 100000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.invest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.invest"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 11 Jul 2024 17:39:40 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "788"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"loan\": {\n            \"id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n            \"borrower_user_id\": \"borrower_1\",\n            \"status\": \"INVESTED\",\n            \"principal_amount\": 1000000,\n            \"tenor_in_months\": 12,\n            \"borrower_rate_per_month\": 0.01,\n            \"investor_rate_per_month\": 0.008,\n            \"agreement_letter_url\": \"https://example.com\",\n            \"time_proposed\": \"2024-07-11T23:25:51.402853+07:00\",\n            \"time_approved\": \"2024-07-12T06:27:58.687+07:00\",\n            \"time_invested\": \"2024-07-12T00:39:40.5944374+07:00\",\n            \"time_disbursed\": null,\n            \"visit_proof_before_approval_picture_url\": \"https://example.com/visit-proof\",\n            \"signed_loan_agreement_letter_url\": null,\n            \"investor\": null\n        },\n        \"new_investment\": {\n            \"id\": \"d1f82d0f-3423-48b1-8396-94e14be13d59\",\n            \"investor_user_id\": \"investor_1\",\n            \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n            \"amount\": 100000,\n            \"time_invested\": \"2024-07-12T00:39:40.5944374+07:00\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Upload Signed Agreement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsImtpZCI6IjhiYmUwN2RlLTE4NjctNDJmMS04YjJiLWMwODMzNTIyYzM3NS0yYmE2ZTlhNy1kMTBjLTRiY2YtYjhhMi01Y2RhMjhhZmRjMDAiLCJ0eXAiOiJKV1QifQ.eyJhbGNjIjp7InVzZXJfaWQiOiJmaWVsZF9vZmZpY2VyXzEifSwiYXVkIjpbImFtYXJ0aGEtZnJvbnRlbmQiXSwiZXhwIjoxNzUyMzMyMzg0LCJpYXQiOjE3MjA3OTYzODQsImlzcyI6ImFtYXJ0aGEvbG9hbi1lbmdpbmUtc2VydmljZSJ9.SXyHwzLLx71f6LQutoyG5ecK9z4YB_qecQLnDSMifzAnQHhLr7ZCS2Z8Nw6-GGD7VFeo-QEozqiCz46vvYQzZQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"file_type\": \"jpeg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/object_storage.get_presigned_url.upload_signed_agreement",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"object_storage.get_presigned_url.upload_signed_agreement"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/object_storage.get_presigned_url.upload_visit_proof",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"object_storage.get_presigned_url.upload_visit_proof"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 15:01:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "422"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"url\": \"https://yoshua-amartha-test-files.s3.ap-southeast-1.amazonaws.com/agreement-letter/c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa/signed.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQPWXMTNFAYPZYCMP%2F20240712%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20240712T150108Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=b7506c522cdfd8b84bf0d9a030836a14271f9395ececf2703d646c52eb9fb740\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Loan Disburse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiIsImtpZCI6IjhiYmUwN2RlLTE4NjctNDJmMS04YjJiLWMwODMzNTIyYzM3NS0yYmE2ZTlhNy1kMTBjLTRiY2YtYjhhMi01Y2RhMjhhZmRjMDAiLCJ0eXAiOiJKV1QifQ.eyJhbGNjIjp7InVzZXJfaWQiOiJmaWVsZF9vZmZpY2VyXzEifSwiYXVkIjpbImFtYXJ0aGEtZnJvbnRlbmQiXSwiZXhwIjoxNzUyMzMyMzg0LCJpYXQiOjE3MjA3OTYzODQsImlzcyI6ImFtYXJ0aGEvbG9hbi1lbmdpbmUtc2VydmljZSJ9.SXyHwzLLx71f6LQutoyG5ecK9z4YB_qecQLnDSMifzAnQHhLr7ZCS2Z8Nw6-GGD7VFeo-QEozqiCz46vvYQzZQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"loan_id\": \"c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa\",\r\n  \"signed_loan_agreement_letter_url\": \"https://yoshua-amartha-test-files.s3.ap-southeast-1.amazonaws.com/agreement-letter/c94c7d7e-f85d-40fb-a1e2-584e7eb9eefa/signed.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQPWXMTNFAYPZYCMP%2F20240712%2Fap-southeast-1%2Fs3%2Faws4_request&X-Amz-Date=20240712T160352Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=355af7840389bf3348d7a3d2888f1fcdaa2648ac005599fa6c67d1636bb422b3\",\r\n  \"time_disbursed\": \"2024-07-12T23:27:58.687Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/loan.disburse",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"loan.disburse"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Error Role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"field_officer_user_id\": \"borrower_1\",\r\n  \"signed_loan_agreement_letter_url\": \"https://example.com/signed-agreement\",\r\n  \"time_disbursed\": \"2024-07-11T16:27:58.687Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.disburse",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.disburse"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 04:45:23 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"user should be FIELD_OFFICER\"\n}"
+				},
+				{
+					"name": "Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"field_officer_user_id\": \"field_officer_1\",\r\n  \"signed_loan_agreement_letter_url\": \"https://example.com/signed-agreement\",\r\n  \"time_disbursed\": \"2024-07-11T16:27:58.687Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.disburse",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.disburse"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 04:45:38 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "623"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\n        \"borrower_user_id\": \"borrower_1\",\n        \"status\": \"DISBURSED\",\n        \"principal_amount\": 1000000,\n        \"tenor_in_months\": 12,\n        \"borrower_rate_per_month\": 0.01,\n        \"investor_rate_per_month\": 0.008,\n        \"agreement_letter_url\": \"https://example.com\",\n        \"time_proposed\": \"2024-07-11T23:25:51.402853+07:00\",\n        \"time_approved\": \"2024-07-12T06:27:58.687+07:00\",\n        \"time_invested\": \"2024-07-12T00:39:40.594437+07:00\",\n        \"time_disbursed\": \"2024-07-11T16:27:58.687Z\",\n        \"visit_proof_before_approval_picture_url\": \"https://example.com/visit-proof\",\n        \"signed_loan_agreement_letter_url\": \"https://example.com/signed-agreement\",\n        \"investor\": null\n    }\n}"
+				},
+				{
+					"name": "Error Loan Status",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"loan_id\": \"42036561-f99b-41d6-b65d-2f0964994d35\",\r\n  \"field_officer_user_id\": \"field_officer_1\",\r\n  \"signed_loan_agreement_letter_url\": \"https://example.com/signed-agreement\",\r\n  \"time_disbursed\": \"2024-07-11T16:27:58.687Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/loan.disburse",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"loan.disburse"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Jul 2024 04:46:33 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "42"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"loan status should be INVESTED\"\n}"
+				}
+			]
+		}
+	]
+}
