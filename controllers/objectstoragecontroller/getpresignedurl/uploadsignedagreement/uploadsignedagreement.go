@@ -61,7 +61,7 @@ func UploadSignedAgreementHandler(c *gin.Context) {
 	// Create Presigned URL
 	s3Client, err := s3helper.CreateClientFromSession()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	presignedURLForPutObject, err := s3helper.GeneratePresignedURLForPutObject(
@@ -70,7 +70,7 @@ func UploadSignedAgreementHandler(c *gin.Context) {
 		s3helper.GetAgreementLetterKeyName(input.LoanID, true, input.FileType),
 	)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 

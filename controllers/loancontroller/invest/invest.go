@@ -82,18 +82,18 @@ func InvestLoanHandler(c *gin.Context) {
 
 		s3Client, err := s3helper.CreateClientFromSession()
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 		sesClient, err := emailhelper.CreateClientFromSession()
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
 		presignedUrlForGet, err := GenerateAndUploadPDF(s3Client, input, loan)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
 
@@ -115,7 +115,7 @@ func InvestLoanHandler(c *gin.Context) {
 				TextBody:      body,
 			})
 			if err != nil {
-				c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+				c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 				return
 				//we can also store errors in an array and continue with the next email instead of terminating early
 			}

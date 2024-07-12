@@ -34,7 +34,7 @@ func UserSignInHandler(c *gin.Context) {
 		return
 	}
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("failed checking if user is registered: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed checking if user is registered: %v", err)})
 		return
 	}
 
@@ -51,7 +51,7 @@ func UserSignInHandler(c *gin.Context) {
 		jwtExpiration,
 	)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 

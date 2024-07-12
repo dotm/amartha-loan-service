@@ -36,7 +36,7 @@ func UserSignUpHandler(c *gin.Context) {
 		return
 	}
 	if !errors.Is(err, gorm.ErrRecordNotFound) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": fmt.Sprintf("failed checking if user is registered: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed checking if user is registered: %v", err)})
 		return
 	}
 
@@ -50,7 +50,7 @@ func UserSignUpHandler(c *gin.Context) {
 	hashedPassword, err := passwordhelper.Hash(input.RawPassword)
 	if err != nil {
 		err = fmt.Errorf("error hashing password: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	newUser := models.User{

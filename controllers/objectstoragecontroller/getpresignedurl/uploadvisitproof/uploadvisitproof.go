@@ -56,7 +56,7 @@ func UploadVisitProofHandler(c *gin.Context) {
 	// Create Presigned URL
 	s3Client, err := s3helper.CreateClientFromSession()
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	presignedURLForPutObject, err := s3helper.GeneratePresignedURLForPutObject(
@@ -65,7 +65,7 @@ func UploadVisitProofHandler(c *gin.Context) {
 		fmt.Sprintf("visit-proof/%s", input.LoanID),
 	)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
