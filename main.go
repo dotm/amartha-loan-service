@@ -5,6 +5,7 @@ import (
 	disburseloancontroller "amartha/loan-service/controllers/loancontroller/disburse"
 	investloancontroller "amartha/loan-service/controllers/loancontroller/invest"
 	proposeloancontroller "amartha/loan-service/controllers/loancontroller/propose"
+	"amartha/loan-service/helpers/envhelper"
 	"amartha/loan-service/models"
 	"net/http"
 
@@ -12,6 +13,7 @@ import (
 )
 
 func main() {
+	envhelper.SetLocalEnvVar()
 	r := gin.Default()
 	models.ConnectDatabase()
 

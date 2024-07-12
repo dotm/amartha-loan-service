@@ -1,7 +1,5 @@
 ## TODO
 
-- remove password from DSN Postgres
-- use error code for error
 - add email functionality
   - add email field for users
   - c. once invested all investors will receive an email containing link to agreement letter (pdf)
@@ -34,6 +32,8 @@ values
 
 ## Possible Improvements
 
+- use error code for error
+  - example: user/not-found, loan/not-found, user/unauthorized-role, etc.
 - implement user authentication
   - store salted and hashed password in users table when sign up
   - use JWT for sign in

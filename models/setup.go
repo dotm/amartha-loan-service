@@ -1,6 +1,8 @@
 package models
 
 import (
+	"amartha/loan-service/helpers/envhelper"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -8,7 +10,7 @@ import (
 var DB *gorm.DB
 
 func ConnectDatabase() {
-	dsn := "host=localhost user=postgres password=098098 dbname=amartha_loan_service port=5432 sslmode=disable TimeZone=Asia/Bangkok"
+	dsn := envhelper.GetEnvVar("POSTGRESQL_DSN")
 
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
