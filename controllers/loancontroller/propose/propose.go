@@ -2,6 +2,7 @@ package proposeloancontroller
 
 import (
 	"amartha/loan-service/constants"
+	"amartha/loan-service/helpers/authorizationhelper"
 	"amartha/loan-service/models"
 	"fmt"
 	"net/http"
@@ -12,7 +13,6 @@ import (
 )
 
 type ProposeLoanInput struct {
-	BorrowerUserID       string  `json:"borrower_user_id" binding:"required"`
 	PrincipalAmount      int64   `json:"principal_amount" binding:"required"`
 	TenorInMonths        int64   `json:"tenor_in_months" binding:"required"`
 	BorrowerRatePerMonth float64 `json:"borrower_rate_per_month" binding:"required"`
@@ -29,8 +29,13 @@ func ProposeLoanHandler(c *gin.Context) {
 	}
 
 	// Get required data (can be moved to repository layer)
+	borrowerUserID, err := authorizationhelper.GetUserIdFromGinContextHeader(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	var user models.User
-	if err := models.DB.Where("id = ?", input.BorrowerUserID).First(&user).Error; err != nil {
+	if err := models.DB.Where("id = ?", borrowerUserID).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}
@@ -59,7 +64,7 @@ func ProposeLoanBusinessLogic(input ProposeLoanInput, user models.User, now time
 	//Create data
 	loan = models.Loan{
 		ID:                   uuid.NewString(),
-		BorrowerUserID:       input.BorrowerUserID,
+		BorrowerUserID:       user.ID,
 		Status:               constants.LoanStatusProposed,
 		PrincipalAmount:      input.PrincipalAmount,
 		TenorInMonths:        input.TenorInMonths,

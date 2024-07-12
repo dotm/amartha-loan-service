@@ -24,7 +24,6 @@ var timeDisbursed = time.Now()
 
 var input = DisburseLoanInput{
 	LoanID:                       loanID,
-	FieldOfficerUserID:           userID,
 	SignedLoanAgreementLetterUrl: signedLoanAgreementLetterUrl,
 	TimeDisbursed:                timeDisbursed,
 }

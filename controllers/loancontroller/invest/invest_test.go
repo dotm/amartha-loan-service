@@ -44,9 +44,8 @@ var existingInvestments = []models.LoanInvestedByInvestor{
 func TestInvestLoanSuccessfulFullyInvested(t *testing.T) {
 	//given
 	input := InvestLoanInput{
-		LoanID:         loanID,
-		InvestorUserID: userID,
-		Amount:         int64(500000),
+		LoanID: loanID,
+		Amount: int64(500000),
 	}
 	approvedLoan := models.Loan{
 		ID:                                 loanID,
@@ -77,7 +76,7 @@ func TestInvestLoanSuccessfulFullyInvested(t *testing.T) {
 	assert.Equal(t, constants.LoanStatusInvested, loan.Status)
 	assert.Equal(t, timeInvested, *loan.TimeInvested)
 	assert.Equal(t, input.Amount, newInvestment.Amount)
-	assert.Equal(t, input.InvestorUserID, newInvestment.InvestorUserID)
+	assert.Equal(t, user.ID, newInvestment.InvestorUserID)
 	assert.Equal(t, input.LoanID, newInvestment.LoanID)
 }
 
@@ -85,9 +84,8 @@ func TestInvestLoanSuccessfulFullyInvested(t *testing.T) {
 func TestInvestLoanSuccessfulButNotFullyInvested(t *testing.T) {
 	//given
 	input := InvestLoanInput{
-		LoanID:         loanID,
-		InvestorUserID: userID,
-		Amount:         int64(100000),
+		LoanID: loanID,
+		Amount: int64(100000),
 	}
 	approvedLoan := models.Loan{
 		ID:                                 loanID,
@@ -117,7 +115,7 @@ func TestInvestLoanSuccessfulButNotFullyInvested(t *testing.T) {
 	assert.Equal(t, input.LoanID, loan.ID)
 	assert.Equal(t, constants.LoanStatusApproved, loan.Status)
 	assert.Equal(t, input.Amount, newInvestment.Amount)
-	assert.Equal(t, input.InvestorUserID, newInvestment.InvestorUserID)
+	assert.Equal(t, user.ID, newInvestment.InvestorUserID)
 	assert.Equal(t, input.LoanID, newInvestment.LoanID)
 }
 
@@ -125,9 +123,8 @@ func TestInvestLoanSuccessfulButNotFullyInvested(t *testing.T) {
 func TestInvestFailedOverSubscribed(t *testing.T) {
 	//given
 	input := InvestLoanInput{
-		LoanID:         loanID,
-		InvestorUserID: userID,
-		Amount:         int64(900000),
+		LoanID: loanID,
+		Amount: int64(900000),
 	}
 	approvedLoan := models.Loan{
 		ID:                                 loanID,
@@ -159,9 +156,8 @@ func TestInvestFailedOverSubscribed(t *testing.T) {
 func TestInvestFailedIncorrectUserRole(t *testing.T) {
 	//given
 	input := InvestLoanInput{
-		LoanID:         loanID,
-		InvestorUserID: userID,
-		Amount:         int64(100000),
+		LoanID: loanID,
+		Amount: int64(100000),
 	}
 	approvedLoan := models.Loan{
 		ID:                                 loanID,
@@ -193,9 +189,8 @@ func TestInvestFailedIncorrectUserRole(t *testing.T) {
 func TestInvestFailedIncorrectLoanStatus(t *testing.T) {
 	//given
 	input := InvestLoanInput{
-		LoanID:         loanID,
-		InvestorUserID: userID,
-		Amount:         int64(100000),
+		LoanID: loanID,
+		Amount: int64(100000),
 	}
 	approvedLoan := models.Loan{
 		ID:                                 loanID,

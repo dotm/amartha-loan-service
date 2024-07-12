@@ -18,7 +18,6 @@ var agreementLetterUrl = "https://example.com"
 var timeProposed = time.Now()
 
 var input = ProposeLoanInput{
-	BorrowerUserID:       userID,
 	PrincipalAmount:      principalAmount,
 	TenorInMonths:        tenorInMonths,
 	BorrowerRatePerMonth: borrowerRatePerMonth,

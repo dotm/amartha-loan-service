@@ -5,6 +5,8 @@ import (
 	disburseloancontroller "amartha/loan-service/controllers/loancontroller/disburse"
 	investloancontroller "amartha/loan-service/controllers/loancontroller/invest"
 	proposeloancontroller "amartha/loan-service/controllers/loancontroller/propose"
+	usersignincontroller "amartha/loan-service/controllers/usercontroller/signin"
+	usersignupcontroller "amartha/loan-service/controllers/usercontroller/signup"
 	"amartha/loan-service/helpers/envhelper"
 	"amartha/loan-service/models"
 	"net/http"
@@ -20,6 +22,8 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"data": "hello world"})
 	})
+	r.POST("/v1/user.signup", usersignupcontroller.UserSignUpHandler)
+	r.POST("/v1/user.signin", usersignincontroller.UserSignInHandler)
 	r.POST("/v1/loan.propose", proposeloancontroller.ProposeLoanHandler)
 	r.POST("/v1/loan.approve", approveloancontroller.ApproveLoanHandler)
 	r.POST("/v1/loan.invest", investloancontroller.InvestLoanHandler)

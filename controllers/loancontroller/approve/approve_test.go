@@ -24,7 +24,6 @@ var timeApproved = time.Now()
 
 var input = ApproveLoanInput{
 	LoanID:                             loanID,
-	FieldOfficerUserID:                 userID,
 	VisitProofBeforeApprovalPictureUrl: visitProofBeforeApprovalPictureUrl,
 	TimeApproved:                       timeApproved,
 }

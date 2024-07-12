@@ -2,6 +2,7 @@ package investloancontroller
 
 import (
 	"amartha/loan-service/constants"
+	"amartha/loan-service/helpers/authorizationhelper"
 	"amartha/loan-service/models"
 	"errors"
 	"fmt"
@@ -14,9 +15,8 @@ import (
 )
 
 type InvestLoanInput struct {
-	LoanID         string `json:"loan_id" binding:"required"`
-	InvestorUserID string `json:"investor_user_id" binding:"required"`
-	Amount         int64  `json:"amount" binding:"required"`
+	LoanID string `json:"loan_id" binding:"required"`
+	Amount int64  `json:"amount" binding:"required"`
 }
 
 func InvestLoanHandler(c *gin.Context) {
@@ -28,8 +28,13 @@ func InvestLoanHandler(c *gin.Context) {
 	}
 
 	// Get required data (can be moved to repository layer)
+	investorUserID, err := authorizationhelper.GetUserIdFromGinContextHeader(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	var user models.User
-	if err := models.DB.Where("id = ?", input.InvestorUserID).First(&user).Error; err != nil {
+	if err := models.DB.Where("id = ?", investorUserID).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}

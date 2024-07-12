@@ -2,6 +2,7 @@ package disburseloancontroller
 
 import (
 	"amartha/loan-service/constants"
+	"amartha/loan-service/helpers/authorizationhelper"
 	"amartha/loan-service/models"
 	"fmt"
 	"net/http"
@@ -12,7 +13,6 @@ import (
 
 type DisburseLoanInput struct {
 	LoanID                       string    `json:"loan_id" binding:"required"`
-	FieldOfficerUserID           string    `json:"field_officer_user_id" binding:"required"`
 	SignedLoanAgreementLetterUrl string    `json:"signed_loan_agreement_letter_url" binding:"required"`
 	TimeDisbursed                time.Time `json:"time_disbursed" binding:"required"` //accepts ISO time format (2024-07-11T23:27:58.687Z)
 }
@@ -26,8 +26,13 @@ func DisburseLoanHandler(c *gin.Context) {
 	}
 
 	// Get required data (can be moved to repository layer)
+	fieldOfficerUserID, err := authorizationhelper.GetUserIdFromGinContextHeader(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	var user models.User
-	if err := models.DB.Where("id = ?", input.FieldOfficerUserID).First(&user).Error; err != nil {
+	if err := models.DB.Where("id = ?", fieldOfficerUserID).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}

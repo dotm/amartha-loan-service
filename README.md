@@ -1,7 +1,6 @@
 ## TODO
 
 - add email functionality
-  - add email field for users
   - c. once invested all investors will receive an email containing link to agreement letter (pdf)
   - test with yopmail
 - add S3 functionality for file sharing
@@ -20,20 +19,25 @@
 - go mod init amartha/loan-service
 - go get github.com/gin-gonic/gin gorm.io/gorm
 
-Seed:
+Seed (password is Test123!):
 ```
 INSERT INTO public.users
-(id, "role", "name")
-values
-('borrower_1', 'BORROWER', 'Borrower 1'),
-('investor_1', 'INVESTOR', 'Investor 1'),
-('field_officer_1', 'FIELD_OFFICER', 'Field Officer 1');
+(id, "role", "name", email, hashed_password)
+VALUES
+('borrower_1', 'BORROWER', 'Borrower 1', 'amartha_test_borrower_1@yopmail.com', '$2a$14$jMgHEV/EpcqRKwsFqt/07.U7zWYBCkUL/xt5/AHhgaytt4XAQGjCC')
+('investor_1', 'INVESTOR', 'Investor 1', 'amartha_test_investor_1@yopmail.com', '$2a$14$jMgHEV/EpcqRKwsFqt/07.U7zWYBCkUL/xt5/AHhgaytt4XAQGjCC')
+('field_officer_1', 'FIELD_OFFICER', 'Field Officer 1', 'amartha_test_field_officer_1@yopmail.com', '$2a$14$jMgHEV/EpcqRKwsFqt/07.U7zWYBCkUL/xt5/AHhgaytt4XAQGjCC');
 ```
 
 ## Possible Improvements
 
+- make S3 bucket private
+  - investors can only view loan agreement letter pdf after login and creating presigned url
 - use error code for error
   - example: user/not-found, loan/not-found, user/unauthorized-role, etc.
+- sign up flow:
+  - implement OTP for sign up email verification
+  - restrict field officer role to be added not by sign up but by internal operation team.
 - implement user authentication
   - store salted and hashed password in users table when sign up
   - use JWT for sign in
