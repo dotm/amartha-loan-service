@@ -51,7 +51,7 @@ func UserSignInHandler(c *gin.Context) {
 		jwtExpiration,
 	)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 

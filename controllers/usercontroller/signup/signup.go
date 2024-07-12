@@ -41,9 +41,9 @@ func UserSignUpHandler(c *gin.Context) {
 	}
 
 	// Business Logic
+	// UserRoleFieldOfficer should only be created from internal operation service
 	if input.Role != constants.UserRoleBorrower &&
-		input.Role != constants.UserRoleInvestor &&
-		input.Role != constants.UserRoleFieldOfficer {
+		input.Role != constants.UserRoleInvestor {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user role invalid"})
 		return
 	}

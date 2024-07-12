@@ -24,6 +24,7 @@ func CreateClientFromSession() (*s3.S3, error) {
 }
 
 const DefaultExpireDurationForPresignedURL = 24 * time.Hour
+const DefaultExpireDurationForPresignedURLString = "24 hour"
 
 func UploadFile(
 	s3Client *s3.S3, file io.Reader, bucketName, keyName string,
@@ -77,4 +78,12 @@ func GeneratePresignedURLForPutObject(s3Client *s3.S3, bucketName, keyName strin
 	}
 
 	return presignedUrl, nil
+}
+
+func GetAgreementLetterKeyName(loanID string, signed bool, fileType string) string {
+	fileName := "unsigned"
+	if signed {
+		fileName = "signed"
+	}
+	return fmt.Sprintf("agreement-letter/%s/%s.%s", loanID, fileName, fileType)
 }

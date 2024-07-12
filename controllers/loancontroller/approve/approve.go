@@ -6,15 +6,17 @@ import (
 	"amartha/loan-service/models"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
 type ApproveLoanInput struct {
-	LoanID                             string    `json:"loan_id" binding:"required"`
-	VisitProofBeforeApprovalPictureUrl string    `json:"visit_proof_before_approval_picture_url" binding:"required"`
-	TimeApproved                       time.Time `json:"time_approved" binding:"required"` //accepts ISO time format (2024-07-11T23:27:58.687Z)
+	LoanID       string    `json:"loan_id" binding:"required"`
+	TimeApproved time.Time `json:"time_approved" binding:"required"` //accepts ISO time format (2024-07-11T23:27:58.687Z)
+
+	VisitProofBeforeApprovalPictureUrl string `json:"visit_proof_before_approval_picture_url" binding:"required"`
 }
 
 func ApproveLoanHandler(c *gin.Context) {
@@ -24,6 +26,9 @@ func ApproveLoanHandler(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+	// Clean input
+	// remove query params from S3 presigned URL
+	input.VisitProofBeforeApprovalPictureUrl = strings.Split(input.VisitProofBeforeApprovalPictureUrl, "?")[0]
 
 	// Get required data (can be moved to repository layer)
 	fieldOfficerUserID, err := authorizationhelper.GetUserIdFromGinContextHeader(c)
