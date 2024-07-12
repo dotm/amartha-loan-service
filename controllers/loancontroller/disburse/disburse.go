@@ -1,4 +1,4 @@
-package approveloancontroller
+package disburseloancontroller
 
 import (
 	"amartha/loan-service/constants"
@@ -10,16 +10,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type ApproveLoanInput struct {
-	LoanID                             string    `json:"loan_id" binding:"required"`
-	FieldOfficerUserID                 string    `json:"field_officer_user_id" binding:"required"`
-	VisitProofBeforeApprovalPictureUrl string    `json:"visit_proof_before_approval_picture_url" binding:"required"`
-	TimeApproved                       time.Time `json:"time_approved" binding:"required"` //accepts ISO time format (2024-07-11T23:27:58.687Z)
+type DisburseLoanInput struct {
+	LoanID                       string    `json:"loan_id" binding:"required"`
+	FieldOfficerUserID           string    `json:"field_officer_user_id" binding:"required"`
+	SignedLoanAgreementLetterUrl string    `json:"signed_loan_agreement_letter_url" binding:"required"`
+	TimeDisbursed                time.Time `json:"time_disbursed" binding:"required"` //accepts ISO time format (2024-07-11T23:27:58.687Z)
 }
 
-func ApproveLoanHandler(c *gin.Context) {
+func DisburseLoanHandler(c *gin.Context) {
 	// Validate input
-	var input ApproveLoanInput
+	var input DisburseLoanInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -38,7 +38,7 @@ func ApproveLoanHandler(c *gin.Context) {
 	}
 
 	// Business Logic
-	updatedLoan, err := ApproveLoanBusinessLogic(input, user, loan, time.Now())
+	updatedLoan, err := DisburseLoanBusinessLogic(input, user, loan, time.Now())
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -51,21 +51,21 @@ func ApproveLoanHandler(c *gin.Context) {
 }
 
 // Should be covered with unit test
-func ApproveLoanBusinessLogic(input ApproveLoanInput, user models.User, loan models.Loan, now time.Time) (updatedLoan models.Loan, err error) {
+func DisburseLoanBusinessLogic(input DisburseLoanInput, user models.User, loan models.Loan, now time.Time) (updatedLoan models.Loan, err error) {
 	//Validate business logic
 	if user.Role != constants.UserRoleFieldOfficer {
 		err = fmt.Errorf("user should be %s", constants.UserRoleFieldOfficer)
 		return
 	}
-	if loan.Status != constants.LoanStatusProposed {
-		err = fmt.Errorf("loan status should be %s", constants.LoanStatusProposed)
+	if loan.Status != constants.LoanStatusInvested {
+		err = fmt.Errorf("loan status should be %s", constants.LoanStatusInvested)
 		return
 	}
 
 	//Update data
 	updatedLoan = loan
-	updatedLoan.Status = constants.LoanStatusApproved
-	updatedLoan.VisitProofBeforeApprovalPictureUrl = &input.VisitProofBeforeApprovalPictureUrl
-	updatedLoan.TimeApproved = &input.TimeApproved
+	updatedLoan.Status = constants.LoanStatusDisbursed
+	updatedLoan.SignedLoanAgreementLetterUrl = &input.SignedLoanAgreementLetterUrl
+	updatedLoan.TimeDisbursed = &input.TimeDisbursed
 	return
 }

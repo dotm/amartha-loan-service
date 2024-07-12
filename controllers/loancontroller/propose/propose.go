@@ -28,21 +28,21 @@ func ProposeLoanHandler(c *gin.Context) {
 		return
 	}
 
-	//Get required data
+	// Get required data (can be moved to repository layer)
 	var user models.User
 	if err := models.DB.Where("id = ?", input.BorrowerUserID).First(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not found"})
 		return
 	}
 
-	//Business logic
+	// Business Logic
 	loan, err := ProposeLoanBusinessLogic(input, user, time.Now())
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// Persist data
+	// Persist data (can be moved to repository layer)
 	models.DB.Create(&loan)
 
 	c.JSON(http.StatusOK, gin.H{"data": loan})

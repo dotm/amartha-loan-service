@@ -1,6 +1,12 @@
-##
+## TODO
 
 - remove password from DSN Postgres
+- use error code for error
+- add email functionality
+  - add email field for users
+  - c. once invested all investors will receive an email containing link to agreement letter (pdf)
+  - test with yopmail
+- add S3 functionality for file sharing
 
 ## Run in Local
 
@@ -28,8 +34,10 @@ values
 
 ## Possible Improvements
 
-- Use JWT for user authentication
-  - get userID from JWT directly instead of from HTTP request
+- implement user authentication
+  - store salted and hashed password in users table when sign up
+  - use JWT for sign in
+  - in loan endpoint requests, get userID from JWT directly instead of from HTTP request
 - Cron to cancel loan if investments doesn't reach principal amount after some expiry time.
   - New loan status: expired.
 - Use LoanStatusHistory table.
@@ -41,4 +49,6 @@ values
   - With cloud object storage:
     - generate presigned URL to upload image and then store the link in database.
     - get image with presigned URL because it's not for public.
-- Create end-to-end tests to make sure http request parsing and integration with database/object storage works correctly
+- Create end-to-end tests to make sure:
+  - http request parsing works correctly
+  - integration with database/object storage/email client works correctly
