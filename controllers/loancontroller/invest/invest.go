@@ -123,8 +123,22 @@ func InvestLoanHandler(c *gin.Context) {
 	}
 
 	// Persist data (can be moved to repository layer)
-	models.DB.Updates(&updatedLoan)
-	models.DB.Create(&newInvestment)
+	// Use transaction for multiple update/create operations
+	err = models.DB.Transaction(func(tx *gorm.DB) error {
+		if err := tx.Updates(&updatedLoan).Error; err != nil {
+			// return any error will rollback
+			return err
+		}
+		if err := tx.Create(&newInvestment).Error; err != nil {
+			// return any error will rollback
+			return err
+		}
+		return nil
+	})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"data": gin.H{

@@ -64,10 +64,6 @@ AWS Setup:
 - sign up flow:
   - implement OTP for sign up email verification
   - restrict field officer role to be added not by sign up but by internal operation team.
-- implement user authentication
-  - store salted and hashed password in users table when sign up
-  - use JWT for sign in
-  - in loan endpoint requests, get userID from JWT directly instead of from HTTP request
 - Cron to cancel loan if investments doesn't reach principal amount after some expiry time.
   - New loan status: expired.
 - Use LoanStatusHistory table.
@@ -75,8 +71,4 @@ AWS Setup:
   - To status
   - Timestamp
   - Detail json (picture proof, signed agreement, etc.)
-- Upload VisitProofBeforeApprovalPictureUrl
-  - With cloud object storage:
-    - generate presigned URL to upload image and then store the link in database.
-    - get image with presigned URL because it's not for public.
 - add logging for visibility and track error metrics for alert in PagerDuty

@@ -55,7 +55,11 @@ func ApproveLoanHandler(c *gin.Context) {
 	}
 
 	// Persist data (can be moved to repository layer)
-	models.DB.Updates(&updatedLoan)
+	// Use transaction for multiple update/create operations
+	if err := models.DB.Updates(&updatedLoan).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": updatedLoan})
 }

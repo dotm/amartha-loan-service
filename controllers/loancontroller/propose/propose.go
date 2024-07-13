@@ -48,7 +48,11 @@ func ProposeLoanHandler(c *gin.Context) {
 	}
 
 	// Persist data (can be moved to repository layer)
-	models.DB.Create(&loan)
+	// Use transaction for multiple update/create operations
+	if err := models.DB.Create(&loan).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 
 	c.JSON(http.StatusOK, gin.H{"data": loan})
 }
